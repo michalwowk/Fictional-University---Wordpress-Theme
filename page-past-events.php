@@ -14,11 +14,25 @@
 
 <div class="container container--narrow page-section">
 <?php 
+    $today = date('Ymd');
     $args = array(
-        'post_type' => 'event'
+        'paged' => get_query_var( 'paged', 1 ),
+        'post_type' => 'event',
+        'orderby' => 'meta_value_num',
+        'meta_key' => 'event_date',
+        'order' => 'ASC',
+        'meta_query' => array(
+            array(
+                'key' => 'event_date',
+                'compare' => '<',
+                'value' => $today,
+                'type' => 'numeric'
+            )
+        )
     );
 
     $pastEvents = new WP_Query($args);
+
 
 ?>    
 
@@ -41,9 +55,12 @@
     </div>
     <?php 
 }
+    $paginationArgs = array(
+        'total' => $pastEvents->max_num_pages,
+    );
 
-echo paginate_links();
-?>
+    echo paginate_links($paginationArgs);
+    ?>
 
 </div>
 

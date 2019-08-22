@@ -29,11 +29,13 @@
             <p><?php echo wp_trim_words(get_the_content(), 18) ?> <a href="<?php the_permalink() ?>" class="nu gray">Learn more</a></p>
         </div>
     </div>
-    <?php 
-}
-
-echo paginate_links();
+    <?php }
+    echo paginate_links();
 ?>
+
+<hr class="section-break">
+
+<p>Looking for a recap of past events?  <a href="<?php echo site_url('/past-events') ?>">Check out our past event archive</a>.</p>
 
 </div>
 
